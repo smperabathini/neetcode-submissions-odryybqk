@@ -1,0 +1,14 @@
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        m = [0] * 26
+        maxf = 0
+        l = 0
+        res = 0
+        for r in range(len(s)):
+            m[ord(s[r]) - ord('A')] += 1
+            maxf = max(maxf, m[ord(s[r]) - ord('A')])
+            if (r-l + 1) - maxf > k:
+                m[ord(s[l]) - ord('A')] -= 1
+                l += 1
+            res = max(res, (r-l + 1))
+        return res
